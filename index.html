@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>استمارة منح هوية الوزارة - وزارة الشباب والرياضة</title>
+
+    <!-- مكتبة حفظ PDF -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="استمارة الوزارة">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="theme-color" content="#166534">
+    <meta name="format-detection" content="telephone=no">
+    <title>استمارة وزارة الشباب والرياضة - العراق</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap');
+        @media (max-width: 600px) {
+  body { font-size: 14px; }
+  .container { width: 100%; }
+}
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+
+        body {
+            font-family: 'Cairo', Arial, sans-serif;
+            background: #e0e0e0;
+            padding: 20px;
+            direction: rtl;
+            margin: 0;
+        }
+
+        /* صفحة A4 */
+        .a4-page {
+            width: 215mm;
+            height: 297mm;
+            margin: 0 auto;
+            background: white;
+            position: relative;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        /* العلامة المائية */
+        .watermark {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 145mm;
+            height: 145mm;
+            opacity: 0.15;
+            pointer-events: none;
+            z-index: 0;
+            background-image: url('image.png');
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+
+        /* الترويسة */
+        .header {
+            position: relative;
+            height: 33mm;
+            background: #c8e6c9;
+            margin: 0 ;
+             width:100%;
+            padding: 3mm 8mm;
+            border-bottom: 2px dashed #666;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 2;
+            flex-direction: row-reverse;
+        }
+
+        .photo-box {
+            width: 23mm;
+            height: 26mm;
+            border: 2px solid #000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255,255,255,0.3);
+            font-size: 10pt;
+            font-weight: bold;
+            z-index: 3;
+        }
+
+        .logo-center {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            z-index: 3;
+        }
+
+        .logo-center img {
+            width: 28mm;
+            height: 28mm;
+            object-fit: contain;
+        }
+
+        .header-text {
+            text-align: right;
+            color: #000;
+            font-weight: bold;
+            font-size: 10pt;
+            line-height: 1.6;
+            z-index: 3;
+        }
+
+        /* العنوان الرئيسي */
+        .main-title {
+            text-align: center;
+            font-size: 12pt;
+            font-weight: bold;
+            color: #000;
+            margin: 4mm 0;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* المحتوى */
+        .content {
+            padding: 0 9mm;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* الحقول - شفافة مع خطوط داكنة */
+        .field-row {
+            display: flex;
+            align-items: center;
+            margin-bottom: 3mm;
+            width: 100%;
+        }
+
+        .field-label {
+            font-weight: bold;
+            font-size: 11pt;
+            white-space: nowrap;
+            margin-left: 3mm;
+            color: #000;
+        }
+
+        .field-input-box {
+            flex: 1;
+            border: 3px solid #000;
+            border-radius: 4mm;
+            height: 8mm;
+            background: rgba(255,255,255,0.2);
+            max-width: 130mm;
+        }
+
+        .field-input {
+            width: 100%;
+            height: 100%;
+            border: none;
+            background: transparent;
+            text-align: center;
+            font-size: 12pt;
+            font-weight: 600;
+            padding: 0 3mm;
+            outline: none;
+            color: #000;
+            font-family: 'Cairo', Arial, sans-serif;
+        }
+
+        /* التوقيعات الجانبية - شفافة مع خط داكن */
+        .signature-side {
+            width: 48mm;
+            height: 20mm;
+            border: 3px solid #000;
+            border-radius: 5mm;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            font-size: 10pt;
+            font-weight: bold;
+            background: rgba(255,255,255,0.25);
+            margin-right: 3mm ;
+            color: #000;
+            padding-bottom: 2mm;
+            padding-top: 15mm;
+            text-align: center;
+            line-height: 1.2;
+        }
+
+        /* صف الموبايل ونوع الإصدار */
+        .mobile-issue-row {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            margin: 3mm 0;
+            gap: 4mm;
+        }
+
+        .mobile-section {
+            display: flex;
+            align-items: center;
+        }
+
+        .mobile-box {
+            width: 45mm;
+            border: 2px solid #000;
+            border-radius: 4mm;
+            height: 6mm;
+            margin-right: 2mm;
+            background: rgba(255,255,255,0.2);
+        }
+
+        /* نوع الإصدار */
+        .issue-types {
+            display: flex;
+            align-items: center;
+            gap: 3mm;
+        }
+
+        .issue-item {
+            display: flex;
+            align-items: center;
+            gap: 1mm;
+            font-size: 9pt;
+            font-weight: 600;
+            white-space: nowrap;
+            cursor: pointer;
+        }
+
+        .check-box {
+            width: 5mm;
+            height: 5mm;
+            border: 2px solid #000;
+            display: inline-block;
+            background: rgba(255,255,255,0.3);
+        }
+
+        check-box.checked {
+            background: #4caf50;
+            position: relative;
+        }
+
+        check-box.checked::after {
+            content: '✓';
+            color: white;
+            font-size: 8pt;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        /* التوقيعات الرئيسية - شفافة مع خط داكن */
+        .main-signatures-row {
+            display: flex;
+            justify-content: space-between;
+            gap: 5mm;
+            margin: 3mm 0;
+        }
+
+        .main-sig {
+            flex: 1;
+            height: 26mm;
+            border: 3px solid #000;
+            border-radius: 4mm;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            font-size: 10pt;
+            font-weight: bold;
+            text-align: center;
+            background: rgba(255,255,255,0.2);
+            color: #000;
+            padding-bottom: 3mm;
+            padding-top: 14mm;
+            line-height: 1.2;
+        }
+
+        /* توقيعات المسؤولين - شفافة مع خط داكن */
+        .sub-signatures-row {
+            display: flex;
+            justify-content: space-between;
+            gap: 4mm;
+            margin: 3mm 0;
+        }
+
+        .sub-sig {
+            flex: 1;
+            height: 28mm;
+            border: 3px solid #000;
+            border-radius: 4mm;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            font-size: 10pt;
+            font-weight: bold;
+            text-align: center;
+            background: rgba(255,255,255,0.2);
+            color: #000;
+            padding-bottom: 3mm;
+            padding-top: 16mm;
+            line-height: 1.4;
+        }
+
+        /* الملاحظات */
+        .notes-section {
+            margin-top: 2mm;
+        }
+
+        .notes-title {
+            font-weight: bold;
+            font-size: 11pt;
+            margin-bottom: 3mm;
+            color: #000;
+        }
+
+        .notes-list {
+            list-style: none;
+            font-size: 9pt;
+            line-height: 1.5;
+            color: #000;
+        }
+
+        .notes-list li {
+            margin-bottom: 3mm;
+            text-indent: -3mm;
+            padding-right: 2mm;
+        }
+
+        /* تذييل الصفحة */
+        .footer {
+            position: absolute;
+            bottom:2mm;
+            left: 6mm;
+            font-size: 8pt;
+            color: #666;
+            z-index: 1;
+        }
+
+        /* أزرار التحكم */
+        .controls {
+            text-align: center;
+            margin: 20px;
+            direction: rtl;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-family: 'Cairo', Arial;
+            font-size: 12pt;
+            font-weight: bold;
+            transition: all 0.3s;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            min-width: 140px;
+        }
+
+        .btn-print { background: #4caf50; color: white; }
+        .btn-pdf { background: #2196f3; color: white; }
+        .btn-clear { background: #f44336; color: white; }
+
+        /* إعدادات الطباعة */
+        @media print {
+            @page {
+                size: A4 portrait;
+                margin: 0;
+            }
+
+            body {
+                background: white !important;
+                padding: 0 !important;
+                margin: 0 !important;
+                width: 215mm !important;
+                height: 297mm !important;
+            }
+
+            .a4-page {
+                box-shadow: none !important;
+                margin: 0 !important;
+                width: 215mm !important;
+                height: 297mm !important;
+                overflow: visible !important;
+            }
+
+            .controls {
+                display: none !important;
+            }
+
+            .header {
+                background: #c8e6c9 !important;
+                height: 33mm !important;
+            }
+
+            .watermark {
+                opacity: 0.12 !important;
+                display: block !important;
+            }
+
+            /* الحقول شفافة في الطباعة */
+            .field-input-box, .mobile-box {
+                background: rgba(255,255,255,0.15) !important;
+                border: 2px solid #000 !important;
+            }
+
+            .field-input {
+                background: transparent !important;
+            }
+
+            .photo-box, .signature-side, .main-sig, .sub-sig {
+                background: rgba(255,255,255,0.2) !important;
+                border: 2px solid #000 !important;
+            }
+
+            .main-sig, .sub-sig {
+                border: 3px solid #000 !important;
+            }
+
+            .check-box {
+                background: rgba(255,255,255,0.25) !important;
+                border: 2px solid #000 !important;
+            }
+
+            * {
+                color: #000000 !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+        }
+
+        /* الموبايل */
+        @media screen and (max-width: 768px) {
+            body {
+                padding: 10px;
+                background: #f5f5f5;
+            }
+
+            .a4-page {
+                width: 100%;
+                height: auto;
+                margin: 0 auto 20px;
+            }
+
+            .controls {
+                position: fixed;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                background: white;
+                padding: 15px;
+                margin: 0;
+                box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+                z-index: 1000;
+            }
+
+            .btn {
+                flex: 1;
+                min-width: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- أزرار التحكم -->
+    <div class="controls">
+        <button class="btn btn-print" onclick="printForm()">🖨️ طباعة</button>
+        <button class="btn btn-pdf" onclick="savePDF()">📄 حفظ PDF</button>
+        <button class="btn btn-clear" onclick="clearForm()">🗑️ مسح</button>
+    </div>
+
+    <!-- صفحة الاستمارة -->
+    <div class="a4-page" id="formPage">
+        <div class="watermark"></div>
+
+        <!-- الترويسة -->
+        <div class="header">
+            <div class="photo-box">صورة ٢</div>
+            <div class="logo-center">
+                <img src="image.png" alt="شعار الوزارة" onerror="this.style.display='none'">
+            </div>
+            <div class="header-text">
+                <div>جمهورية العراق</div>
+                <div>وزارة الشباب والرياضة</div>
+                <div>مكتب الوزير</div>
+                <div>قسم التصاريح الأمنية</div>
+            </div>
+        </div>
+
+        <div class="main-title">استمارة منح هوية الوزارة</div>
+
+        <div class="content">
+            <!-- الاسم الرباعي -->
+            <div class="field-row">
+                <label class="field-label">الاسم الرباعي واللقب:</label>
+                <div class="field-input-box">
+                    <input type="text" class="field-input" id="fullName">
+                </div>
+            </div>
+
+            <!-- الاسم الإنجليزي -->
+            <div class="field-row">
+                <label class="field-label">الاسم باللغة الانكليزية:</label>
+                <div class="field-input-box">
+                    <input type="text" class="field-input" id="englishName" dir="ltr">
+                </div>
+            </div>
+
+            <!-- العنوان الوظيفي + توقيع -->
+            <div class="field-row" style="justify-content: space-between;">
+                <div style="display: flex; align-items: center; flex: 1;">
+                    <label class="field-label">العنوان الوظيفي الحالي:</label>
+                    <div class="field-input-box" style="max-width: 70mm;">
+                        <input type="text" class="field-input" id="jobTitle">
+                    </div>
+                </div>
+                <div class="signature-side">توقيع صاحب الطلب</div>
+            </div>
+
+            <!-- المنصب + توقيع -->
+            <div class="field-row" style="justify-content: space-between;">
+                <div style="display: flex; align-items: center; flex: 1;">
+                    <label class="field-label">المنصب:</label>
+                    <div class="field-input-box" style="max-width: 70mm;">
+                        <input type="text" class="field-input" id="position">
+                    </div>
+                </div>
+                <div class="signature-side">توقيع مدير القسم</div>
+            </div>
+
+            <!-- اسم الدائرة -->
+            <div class="field-row" style="justify-content: space-between; margin-bottom: 1mm;">
+                <div style="display: flex; align-items: center; flex: 1;">
+                    <label class="field-label">اسم الدائرة أو المديرية:</label>
+                    <div class="field-input-box" style="max-width: 70mm;">
+                        <input type="text" class="field-input" id="circleName">
+                    </div>
+                </div>
+                <div style="width: 50mm; margin-right: 3mm;"></div>
+            </div>
+
+            <!-- رقم الموبايل + نوع الإصدار -->
+            <div class="mobile-issue-row">
+                <div class="mobile-section">
+                    <label class="field-label">رقم الموبايل:</label>
+                    <div class="mobile-box">
+                        <input type="text" class="field-input" id="mobileNumber" dir="ltr">
+                    </div>
+                </div>
+                <div class="issue-types">
+                    <label class="issue-item" onclick="toggleCheck(this)">
+                        <span class="check-box" data-value="new"></span>
+                        <span>إصدار جديد</span>
+                    </label>
+                    <label class="issue-item" onclick="toggleCheck(this)">
+                        <span class="check-box" data-value="replace"></span>
+                        <span>تبديل</span>
+                    </label>
+                    <label class="issue-item" onclick="toggleCheck(this)">
+                        <span class="check-box" data-value="damaged"></span>
+                        <span>بدل تالف</span>
+                    </label>
+                    <label class="issue-item" onclick="toggleCheck(this)">
+                        <span class="check-box" data-value="lost"></span>
+                        <span>بدل ضائع</span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- التوقيعات الرئيسية -->
+            <div class="main-signatures-row">
+                <div class="main-sig">
+                    ختم وتوقيع مدير عام دائرة الموظف
+                </div>
+                <div class="main-sig">
+                    ختم وتوقيع مدير قسم التصاريح الأمنية
+                </div>
+            </div>
+
+            <!-- توقيعات المسؤولين -->
+            <div class="sub-signatures-row">
+                <div class="sub-sig">
+                    توقيع مسؤول شعبة<br>المعلومات
+                </div>
+                <div class="sub-sig">
+                    توقيع مسؤول شعبة<br>التصاريح
+                </div>
+                <div class="sub-sig">
+                    توقيع مسؤول شعبة<br>الهويات
+                </div>
+            </div>
+
+            <!-- الملاحظات - تم تعديل الفقرة الأولى -->
+            <div class="notes-section">
+                <div class="notes-title">ملاحظات:-</div>
+                <ul class="notes-list">
+                    <li>1- يرفق نسخة من البطاقة الوطنية.</li>
+                    <li>2- يرفق نسخة من الأمر الوزاري بالتعيين ونسخة من كتاب المباشرة في حال الإصدار الأول.</li>
+                    <li>3- يرفق نسخة من أمر النقل والمباشرة في حال الانتقال من دائرة إلى أخرى.</li>
+                    <li>4 - يرفق نسخة من أمر التكليف في حال منصب مدير قسم فما فوق.</li>
+                    <li>5-  يرفق نسخة من الأمر الجامعي في حال إضافة عبارة (دكتور).</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer">
+            SPD-QP-01,03,01-15 JUN.2023
+        </div>
+    </div>
+
+    <script>
+        function toggleCheck(element) {
+            const checkbox = element.querySelector('.check-box');
+            checkbox.classList.toggle('checked');
+            localStorage.setItem('checkbox_' + checkbox.dataset.value, checkbox.classList.contains('checked'));
+        }
+
+        function restoreCheckboxes() {
+            document.querySelectorAll('.check-box').forEach(box => {
+                if (localStorage.getItem('checkbox_' + box.dataset.value) === 'true') {
+                    box.classList.add('checked');
+                }
+            });
+        }
+
+        function clearForm() {
+            if(confirm('هل أنت متأكد من مسح جميع البيانات؟')) {
+                document.querySelectorAll('input[type="text"]').forEach(input => {
+                    input.value = '';
+                    localStorage.removeItem(input.id);
+                });
+                document.querySelectorAll('.check-box').forEach(box => {
+                    box.classList.remove('checked');
+                    localStorage.removeItem('checkbox_' + box.dataset.value);
+                });
+            }
+        }
+
+        function printForm() {
+            window.print();
+        }
+
+        function savePDF() {
+            const element = document.getElementById('formPage');
+            const opt = {
+                margin: 0,
+                filename: 'استمارة_هوية_الوزارة.pdf',
+                image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: {
+                    scale: 2,
+                    useCORS: true,
+                    backgroundColor: '#ffffff'
+                },
+                jsPDF: {
+                    unit: 'mm',
+                    format: 'a4',
+                    orientation: 'portrait'
+                }
+            };
+
+            html2pdf().set(opt).from(element).save().then(() => {
+                alert('تم حفظ الملف بنجاح!');
+            });
+        }
+
+        // حفظ تلقائي
+        document.querySelectorAll('input[type="text"]').forEach(input => {
+            const saved = localStorage.getItem(input.id);
+            if(saved) input.value = saved;
+            input.addEventListener('input', function() {
+                localStorage.setItem(this.id, this.value);
+            });
+        });
+
+        window.addEventListener('load', restoreCheckboxes);
+    </script>
+
+</body>
+</html>
