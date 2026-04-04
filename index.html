@@ -6,7 +6,6 @@
     <title>استمارة منح هوية الوزارة - وزارة الشباب والرياضة</title>
 
     <!-- مكتبة حفظ PDF -->
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="استمارة الوزارة">
@@ -18,10 +17,11 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap');
+
         @media (max-width: 600px) {
-  body { font-size: 14px; }
-  .container { width: 100%; }
-}
+            body { font-size: 14px; }
+            .container { width: 100%; }
+        }
 
         * {
             margin: 0;
@@ -29,13 +29,12 @@
             box-sizing: border-box;
         }
 
-
         body {
             font-family: 'Cairo', Arial, sans-serif;
             background: #e0e0e0;
-            padding: 20px;
+            padding: 0; /* تم التعديل: إزالة الـ padding */
+            margin: 0;  /* تم التعديل: إزالة الـ margin */
             direction: rtl;
-            margin: 0;
         }
 
         /* صفحة A4 */
@@ -47,6 +46,7 @@
             position: relative;
             box-shadow: 0 0 10px rgba(0,0,0,0.1);
             overflow: hidden;
+            padding: 0; /* تم التعديل: إضافة padding 0 */
         }
 
         /* العلامة المائية */
@@ -66,13 +66,13 @@
             background-position: center;
         }
 
-        /* الترويسة */
+        /* الترويسة - تم التعديل هنا */
         .header {
             position: relative;
-            height: 35mm;
+            height: 33mm;
             background: #c8e6c9;
-            margin: 0 ;
-             width:100%;
+            margin: 0;
+            width: 100%; /* تم التعديل: إضافة width 100% */
             padding: 3mm 8mm;
             border-bottom: 2px dashed #666;
             display: flex;
@@ -80,6 +80,7 @@
             align-items: center;
             z-index: 2;
             flex-direction: row-reverse;
+            box-sizing: border-box; /* تم التعديل: إضافة box-sizing */
         }
 
         .photo-box {
@@ -188,7 +189,7 @@
             font-size: 10pt;
             font-weight: bold;
             background: rgba(255,255,255,0.25);
-            margin-right: 3mm ;
+            margin-right: 3mm;
             color: #000;
             padding-bottom: 2mm;
             padding-top: 15mm;
@@ -244,12 +245,12 @@
             background: rgba(255,255,255,0.3);
         }
 
-        check-box.checked {
+        .check-box.checked {
             background: #4caf50;
             position: relative;
         }
 
-        check-box.checked::after {
+        .check-box.checked::after {
             content: '✓';
             color: white;
             font-size: 8pt;
@@ -339,7 +340,7 @@
         /* تذييل الصفحة */
         .footer {
             position: absolute;
-            bottom:2mm;
+            bottom: 2mm;
             left: 6mm;
             font-size: 8pt;
             color: #666;
@@ -404,6 +405,7 @@
             .header {
                 background: #c8e6c9 !important;
                 height: 33mm !important;
+                width: 100% !important; /* تم التعديل */
             }
 
             .watermark {
@@ -604,7 +606,7 @@
                 </div>
             </div>
 
-            <!-- الملاحظات - تم تعديل الفقرة الأولى -->
+            <!-- الملاحظات -->
             <div class="notes-section">
                 <div class="notes-title">ملاحظات:-</div>
                 <ul class="notes-list">
