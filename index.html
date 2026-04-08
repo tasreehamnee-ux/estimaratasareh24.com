@@ -37,7 +37,7 @@
             direction: rtl;
         }
 
-        /* صفحة A4 */
+        /* صفحة A4 - القياسات الدقيقة 210×297 مم */
         .a4-page {
             width: 210mm;
             height: 296mm;
@@ -55,9 +55,9 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 145mm;
-            height: 145mm;
-            opacity: 0.15;
+            width: 160mm;
+            height: 160mm;
+            opacity: 0.12;
             pointer-events: none;
             z-index: 0;
             background-image: url('image.png');
@@ -66,21 +66,21 @@
             background-position: center;
         }
 
-        /* الترويسة - خط متقطع من جميع الجهات - هوامش صغيرة جداً وارتفاع أكبر */
+        /* الترويسة - خط متقطع من جميع الجهات - هوامش متساوية */
         .header-wrapper {
-            margin: 1mm 1mm 0 1mm;
-            border: 1.5px dashed #166534;
-            border-radius: 2mm;
-            padding: 0.5mm;
+            margin: 3mm 3mm 0 3mm; /* هوامش متساوية من الأعلى واليمين واليسار */
+            border: 2px dashed #166534; /* خط متقطع من جميع الجهات */
+            border-radius: 4mm;
+            padding: 1mm; /* مسافة داخلية صغيرة */
             background: white;
         }
 
         .header {
             position: relative;
-            height: 32mm;
+            height: 35mm; /* ارتفاع أكبر لمطابقة الاستمارة */
             background: #c8e6c9;
-            border-radius: 1.5mm;
-            padding: 2mm 5mm;
+            border-radius: 3mm;
+            padding: 0 5mm;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -89,9 +89,9 @@
         }
 
         .photo-box {
-            width: 24mm;
+            width: 25mm;
             height: 28mm;
-            border: 1.5px solid #000;
+            border: 2px solid #000;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -112,8 +112,8 @@
         }
 
         .logo-center img {
-            width: 26mm;
-            height: 26mm;
+            width: 32mm; /* أكبر */
+            height: 32mm;
             object-fit: contain;
         }
 
@@ -121,7 +121,7 @@
             text-align: right;
             color: #000;
             font-weight: bold;
-            font-size: 10pt;
+            font-size: 11pt;
             line-height: 1.6;
             z-index: 3;
         }
@@ -129,42 +129,42 @@
         /* العنوان الرئيسي */
         .main-title {
             text-align: center;
-            font-size: 14pt;
+            font-size: 16pt;
             font-weight: bold;
             color: #000;
-            margin: 3mm 0;
+            margin: 5mm 0;
             position: relative;
             z-index: 1;
         }
 
-        /* المحتوى */
+        /* المحتوى - هوامش متساوية من اليمين واليسار */
         .content {
-            padding: 0 6mm;
+            padding: 0 8mm; /* 8مم من اليمين و 8مم من اليسار */
             position: relative;
             z-index: 1;
         }
 
-        /* الحقول - شفافة مع خطوط داكنة */
+        /* الحقول */
         .field-row {
             display: flex;
             align-items: center;
-            margin-bottom: 2mm;
+            margin-bottom: 3mm;
             width: 100%;
         }
 
         .field-label {
             font-weight: bold;
-            font-size: 10pt;
+            font-size: 11pt;
             white-space: nowrap;
-            margin-left: 2mm;
+            margin-left: 3mm;
             color: #000;
         }
 
         .field-input-box {
             flex: 1;
-            border: 1.5px solid #000;
+            border: 2px solid #000;
             border-radius: 3mm;
-            height: 7mm;
+            height: 9mm;
             background: rgba(255,255,255,0.2);
         }
 
@@ -174,9 +174,9 @@
             border: none;
             background: transparent;
             text-align: center;
-            font-size: 11pt;
+            font-size: 12pt;
             font-weight: 600;
-            padding: 0 2mm;
+            padding: 0 3mm;
             outline: none;
             color: #000;
             font-family: 'Cairo', Arial, sans-serif;
@@ -186,37 +186,37 @@
         .signature-row {
             display: flex;
             align-items: flex-start;
-            margin-bottom: 1mm;
+            margin-bottom: 2mm;
             width: 100%;
-            gap: 2mm;
+            gap: 3mm;
         }
 
         .signature-left-box {
-            width: 45mm;
-            height: 22mm;
-            border: 1.5px solid #000;
-            border-radius: 3mm;
+            width: 50mm;
+            height: 28mm;
+            border: 2px solid #000;
+            border-radius: 4mm;
             display: flex;
             align-items: flex-end;
             justify-content: center;
-            font-size: 9pt;
+            font-size: 10pt;
             font-weight: bold;
             background: rgba(255,255,255,0.25);
             color: #000;
             padding-bottom: 2mm;
-            padding-top: 12mm;
+            padding-top: 16mm;
             text-align: center;
-            line-height: 1.2;
+            line-height: 1.3;
             flex-shrink: 0;
-            order: 1; /* يجعله في البداية (اليسار في RTL) */
+            order: 1; /* اليسار */
         }
 
         .fields-right-section {
             flex: 1;
             display: flex;
             flex-direction: column;
-            gap: 2mm;
-            order: 2; /* يجعله في النهاية (اليمين في RTL) */
+            gap: 3mm;
+            order: 2; /* اليمين */
         }
 
         .field-item {
@@ -226,8 +226,8 @@
         }
 
         .field-item .field-label {
-            font-size: 10pt;
-            margin-left: 2mm;
+            font-size: 11pt;
+            margin-left: 3mm;
         }
 
         .field-item .field-input-box {
@@ -239,9 +239,9 @@
         .mobile-issue-row {
             display: flex;
             align-items: center;
-            justify-content: flex-start;
-            margin: 2mm 0;
-            gap: 3mm;
+            justify-content: flex-end;
+            margin: 3mm 0;
+            gap: 5mm;
         }
 
         .mobile-section {
@@ -250,11 +250,11 @@
         }
 
         .mobile-box {
-            width: 40mm;
-            border: 1.5px solid #000;
+            width: 45mm;
+            border: 2px solid #000;
             border-radius: 3mm;
-            height: 7mm;
-            margin-right: 1mm;
+            height: 8mm;
+            margin-right: 2mm;
             background: rgba(255,255,255,0.2);
         }
 
@@ -262,26 +262,26 @@
         .issue-types {
             display: flex;
             align-items: center;
-            gap: 2mm;
+            gap: 3mm;
         }
 
         .issue-item {
             display: flex;
             align-items: center;
             gap: 1mm;
-            font-size: 8pt;
+            font-size: 10pt;
             font-weight: 600;
             white-space: nowrap;
             cursor: pointer;
         }
 
         .check-box {
-            width: 4mm;
-            height: 4mm;
-            border: 1.5px solid #000;
+            width: 5mm;
+            height: 5mm;
+            border: 2px solid #000;
             display: inline-block;
             background: rgba(255,255,255,0.3);
-            border-radius: 0.5mm;
+            border-radius: 1mm;
         }
 
         .check-box.checked {
@@ -292,7 +292,7 @@
         .check-box.checked::after {
             content: '✓';
             color: white;
-            font-size: 7pt;
+            font-size: 8pt;
             position: absolute;
             top: 50%;
             left: 50%;
@@ -303,85 +303,85 @@
         .main-signatures-row {
             display: flex;
             justify-content: space-between;
-            gap: 4mm;
-            margin: 3mm 0;
+            gap: 5mm;
+            margin: 4mm 0;
         }
 
         .main-sig {
             flex: 1;
-            height: 28mm;
-            border: 1.5px solid #000;
-            border-radius: 3mm;
+            height: 30mm;
+            border: 2px solid #000;
+            border-radius: 4mm;
             display: flex;
             align-items: flex-end;
             justify-content: center;
-            font-size: 10pt;
+            font-size: 11pt;
             font-weight: bold;
             text-align: center;
             background: rgba(255,255,255,0.2);
             color: #000;
-            padding-bottom: 2mm;
+            padding-bottom: 3mm;
             padding-top: 14mm;
-            line-height: 1.2;
+            line-height: 1.3;
         }
 
         /* توقيعات المسؤولين - ارتفاع أكبر */
         .sub-signatures-row {
             display: flex;
             justify-content: space-between;
-            gap: 3mm;
-            margin: 3mm 0;
+            gap: 4mm;
+            margin: 4mm 0;
         }
 
         .sub-sig {
             flex: 1;
-            height: 38mm;
-            border: 1.5px solid #000;
-            border-radius: 3mm;
+            height: 45mm; /* ارتفاع أكبر لمطابقة الاستمارة */
+            border: 2px solid #000;
+            border-radius: 4mm;
             display: flex;
             align-items: flex-end;
             justify-content: center;
-            font-size: 10pt;
+            font-size: 11pt;
             font-weight: bold;
             text-align: center;
             background: rgba(255,255,255,0.2);
             color: #000;
             padding-bottom: 3mm;
-            padding-top: 22mm;
+            padding-top: 25mm;
             line-height: 1.4;
         }
 
         /* الملاحظات */
         .notes-section {
-            margin-top: 2mm;
+            margin-top: 3mm;
         }
 
         .notes-title {
             font-weight: bold;
-            font-size: 10pt;
-            margin-bottom: 2mm;
+            font-size: 11pt;
+            margin-bottom: 3mm;
             color: #000;
         }
 
         .notes-list {
             list-style: none;
-            font-size: 8pt;
-            line-height: 1.5;
+            font-size: 9pt;
+            line-height: 1.6;
             color: #000;
         }
 
         .notes-list li {
-            margin-bottom: 1mm;
-            text-indent: -2mm;
-            padding-right: 2mm;
+            margin-bottom: 2mm;
+            text-indent: -3mm;
+            padding-right: 3mm;
         }
 
         /* تذييل الصفحة */
         .footer {
             position: absolute;
-            bottom: 2mm;
-            left: 4mm;
-            font-size: 7pt;
+            bottom: 3mm;
+            left: 8mm; /* متساوٍ مع الهامش الأيمن للمحتوى */
+            font-size: 8pt;
             color: #666;
             z-index: 1;
         }
@@ -426,7 +426,7 @@
                 padding: 0 !important;
                 margin: 0 !important;
                 width: 210mm !important;
-                height: 297mm !important;
+                height: 296mm !important;
             }
 
             .a4-page {
@@ -442,15 +442,15 @@
             }
 
             .header-wrapper {
-                margin: 1mm 1mm 0 1mm !important;
-                border: 1.5px dashed #166534 !important;
+                margin: 3mm 3mm 0 3mm !important;
+                border: 2px dashed #166534 !important;
                 -webkit-print-color-adjust: exact !important;
                 print-color-adjust: exact !important;
             }
 
             .header {
                 background: #c8e6c9 !important;
-                height: 32mm !important;
+                height: 35mm !important;
                 -webkit-print-color-adjust: exact !important;
                 print-color-adjust: exact !important;
             }
@@ -462,7 +462,7 @@
 
             .field-input-box, .mobile-box {
                 background: rgba(255,255,255,0.15) !important;
-                border: 1.5px solid #000 !important;
+                border: 2px solid #000 !important;
             }
 
             .field-input {
@@ -471,12 +471,12 @@
 
             .photo-box, .signature-left-box, .main-sig, .sub-sig {
                 background: rgba(255,255,255,0.2) !important;
-                border: 1.5px solid #000 !important;
+                border: 2px solid #000 !important;
             }
 
             .check-box {
                 background: rgba(255,255,255,0.25) !important;
-                border: 1.5px solid #000 !important;
+                border: 2px solid #000 !important;
             }
 
             * {
@@ -527,11 +527,11 @@
         <button class="btn btn-clear" onclick="clearForm()">🗑️ مسح</button>
     </div>
 
-    <!-- صفحة الاستمارة -->
+    <!-- صفحة الاستمارة - A4 كاملة -->
     <div class="a4-page" id="formPage">
         <div class="watermark"></div>
 
-        <!-- الترويسة مع الإطار المتقطع - هوامش صغيرة جداً وارتفاع أكبر -->
+        <!-- الترويسة - خط متقطع من جميع الجهات -->
         <div class="header-wrapper">
             <div class="header">
                 <div class="photo-box">صورة ٢</div>
@@ -553,7 +553,7 @@
             <!-- الاسم الرباعي -->
             <div class="field-row">
                 <label class="field-label">الاسم الرباعي واللقب:</label>
-                <div class="field-input-box" style="max-width: 140mm;">
+                <div class="field-input-box">
                     <input type="text" class="field-input" id="fullName">
                 </div>
             </div>
@@ -561,7 +561,7 @@
             <!-- الاسم الإنجليزي -->
             <div class="field-row">
                 <label class="field-label">الاسم باللغة الانكليزية:</label>
-                <div class="field-input-box" style="max-width: 140mm;">
+                <div class="field-input-box">
                     <input type="text" class="field-input" id="englishName" dir="ltr">
                 </div>
             </div>
@@ -605,7 +605,7 @@
             </div>
 
             <!-- نوع الإصدار -->
-            <div class="field-row" style="justify-content: flex-end; margin: 2mm 0;">
+            <div class="mobile-issue-row">
                 <div class="issue-types">
                     <label class="issue-item" onclick="toggleCheck(this)">
                         <span>إصدار جديد:</span>
