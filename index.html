@@ -50,8 +50,8 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 145mm;
-            height: 145mm;
+            width: 150mm;
+            height: 150mm;
             opacity: 0.15;
             pointer-events: none;
             z-index: 0;
@@ -63,14 +63,14 @@
 
         /* الترويسة - معدلة حسب الصورة */
         .header-wrapper {
-            padding: 2mm 3mm 0 3mm; /* هوامش صغيرة جداً حول الترويسة */
+            padding: 6mm 8mm 0 8mm; /* زيادة الهوامش حول الترويسة */
         }
 
         .header {
             position: relative;
             height: 35mm;
             background: #c8e6c9;
-            border: 2px dashed #166534; /* خط متقطع من جميع الجهات */
+            border: 3px dashed #0d4a1c; /* خط متقطع أكثر وضوحاً */
             border-radius: 3mm;
             display: flex;
             justify-content: space-between;
@@ -125,14 +125,14 @@
             font-size: 13pt;
             font-weight: bold;
             color: #000;
-            margin: 5mm 0 4mm 0;
+            margin: 10mm 0 8mm 0; /* زيادة الهوامش العلوية والسفلية */
             position: relative;
             z-index: 1;
         }
 
         /* المحتوى */
         .content {
-            padding: 0 8mm;
+            padding: 0 14mm; /* زيادة الهوامش الجانبية */
             position: relative;
             z-index: 1;
         }
@@ -141,7 +141,7 @@
         .field-row {
             display: flex;
             align-items: center;
-            margin-bottom: 3mm;
+            margin-bottom: 4mm; /* زيادة المسافة بين الصفوف */
             width: 100%;
         }
 
@@ -201,7 +201,7 @@
             display: flex;
             align-items: center;
             justify-content: flex-start;
-            margin: 3mm 0;
+            margin: 5mm 0; /* زيادة الهوامش */
             gap: 4mm;
         }
 
@@ -265,7 +265,7 @@
             display: flex;
             justify-content: space-between;
             gap: 4mm;
-            margin: 3mm 0;
+            margin: 5mm 0; /* زيادة الهوامش */
         }
 
         .main-sig {
@@ -291,7 +291,7 @@
             display: flex;
             justify-content: space-between;
             gap: 3mm;
-            margin: 3mm 0;
+            margin: 5mm 0; /* زيادة الهوامش */
         }
 
         .sub-sig {
@@ -314,25 +314,25 @@
 
         /* الملاحظات */
         .notes-section {
-            margin-top: 3mm;
+            margin-top: 6mm; /* زيادة الهامش العلوي */
         }
 
         .notes-title {
             font-weight: bold;
             font-size: 11pt;
-            margin-bottom: 2mm;
+            margin-bottom: 3mm; /* زيادة الهامش السفلي */
             color: #000;
         }
 
         .notes-list {
             list-style: none;
             font-size: 9pt;
-            line-height: 1.6;
+            line-height: 1.8; /* زيادة التباعد بين الأسطر */
             color: #000;
         }
 
         .notes-list li {
-            margin-bottom: 2mm;
+            margin-bottom: 3mm; /* زيادة المسافة بين النقاط */
             text-indent: -3mm;
             padding-right: 3mm;
         }
@@ -340,8 +340,8 @@
         /* تذييل الصفحة */
         .footer {
             position: absolute;
-            bottom: 2mm;
-            left: 6mm;
+            bottom: 4mm; /* زيادة الهامش السفلي */
+            left: 8mm; /* زيادة الهامش الأيسر */
             font-size: 8pt;
             color: #666;
             z-index: 1;
@@ -403,13 +403,13 @@
             }
 
             .header-wrapper {
-                padding: 2mm 3mm 0 3mm !important;
+                padding: 6mm 8mm 0 8mm !important; /* هوامش أكبر في الطباعة */
             }
 
             .header {
                 background: #c8e6c9 !important;
                 height: 35mm !important;
-                border: 2px dashed #166534 !important; /* خط متقطع واضح في الطباعة */
+                border: 3px dashed #0d4a1c !important; /* خط متقطع أكثر وضوحاً */
                 border-radius: 3mm !important;
                 -webkit-print-color-adjust: exact !important;
                 print-color-adjust: exact !important;
@@ -437,6 +437,33 @@
             .check-box {
                 background: rgba(255,255,255,0.3) !important;
                 border: 2px solid #000 !important;
+            }
+
+            .content {
+                padding: 0 14mm !important; /* هوامش جانبية أكبر في الطباعة */
+            }
+
+            .main-title {
+                margin: 10mm 0 8mm 0 !important; /* هوامش أكبر في الطباعة */
+            }
+
+            .field-row {
+                margin-bottom: 4mm !important;
+            }
+
+            .mobile-issue-row,
+            .main-signatures-row,
+            .sub-signatures-row {
+                margin: 5mm 0 !important;
+            }
+
+            .notes-section {
+                margin-top: 6mm !important;
+            }
+
+            .footer {
+                bottom: 4mm !important;
+                left: 8mm !important;
             }
 
             * {
@@ -492,7 +519,7 @@
     <div class="a4-page" id="formPage">
         <div class="watermark"></div>
 
-        <!-- الترويسة مع هوامش صغيرة -->
+        <!-- الترويسة مع هوامش أكبر -->
         <div class="header-wrapper">
             <div class="header">
                 <div class="photo-box">صورة ٢</div>
@@ -550,7 +577,7 @@
             </div>
 
             <!-- اسم الدائرة -->
-            <div class="field-row" style="justify-content: space-between; margin-bottom: 1mm;">
+            <div class="field-row" style="justify-content: space-between; margin-bottom: 2mm;">
                 <div style="display: flex; align-items: center; flex: 1;">
                     <label class="field-label">اسم الدائرة أو المديرية:</label>
                     <div class="field-input-box" style="max-width: 68mm;">
