@@ -32,12 +32,12 @@
         body {
             font-family: 'Cairo', Arial, sans-serif;
             background: #e0e0e0;
-            padding: 0;
-            margin: 0;
+            padding: 0; /* تم التعديل: إزالة الـ padding */
+            margin: 0;  /* تم التعديل: إزالة الـ margin */
             direction: rtl;
         }
 
-        /* صفحة A4 - القياسات الدقيقة 210×297 مم */
+        /* صفحة A4 */
         .a4-page {
             width: 210mm;
             height: 296mm;
@@ -46,7 +46,7 @@
             position: relative;
             box-shadow: 0 0 10px rgba(0,0,0,0.1);
             overflow: hidden;
-            padding: 0;
+            padding: 0; /* تم التعديل: إضافة padding 0 */
         }
 
         /* العلامة المائية */
@@ -55,9 +55,9 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 160mm;
-            height: 160mm;
-            opacity: 0.12;
+            width: 145mm;
+            height: 145mm;
+            opacity: 0.15;
             pointer-events: none;
             z-index: 0;
             background-image: url('image.png');
@@ -66,40 +66,34 @@
             background-position: center;
         }
 
-        /* الترويسة - خط متقطع من جميع الجهات - هوامش متساوية */
-        .header-wrapper {
-            margin: 3mm 3mm 0 3mm; /* هوامش متساوية من الأعلى واليمين واليسار */
-            border: 2px dashed #166534; /* خط متقطع من جميع الجهات */
-            border-radius: 4mm;
-            padding: 1mm; /* مسافة داخلية صغيرة */
-            background: white;
-        }
-
-        .header {
-            position: relative;
-            height: 35mm; /* ارتفاع أكبر لمطابقة الاستمارة */
-            background: #c8e6c9;
-            border-radius: 3mm;
-            padding: 0 5mm;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            z-index: 2;
-            flex-direction: row-reverse;
-        }
-
+        /* الترويسة - تم التعديل هنا */
+         .header {
+        position: relative;
+        height: 33mm;
+        background: #c8e6c9;
+        margin: 0;
+        width: 100%; /* تعديل: إزالة uw */
+        padding: 3mm 8mm;
+        border-bottom: 2px dashed #166534; /* تعديل: لون أغمق للخط */
+        border-radius: 0; /* تعديل: إزالة border_reduse الخاطئ */
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        z-index: 2;
+        flex-direction: row-reverse;
+        box-sizing: border-box;
+    }
         .photo-box {
-            width: 25mm;
-            height: 28mm;
+            width: 23mm;
+            height: 26mm;
             border: 2px solid #000;
             display: flex;
             align-items: center;
             justify-content: center;
-            background: rgba(255,255,255,0.9);
+            background: rgba(255,255,255,0.3);
             font-size: 10pt;
             font-weight: bold;
             z-index: 3;
-            border-radius: 1mm;
         }
 
         .logo-center {
@@ -112,8 +106,8 @@
         }
 
         .logo-center img {
-            width: 32mm; /* أكبر */
-            height: 32mm;
+            width: 28mm;
+            height: 28mm;
             object-fit: contain;
         }
 
@@ -121,7 +115,7 @@
             text-align: right;
             color: #000;
             font-weight: bold;
-            font-size: 11pt;
+            font-size: 10pt;
             line-height: 1.6;
             z-index: 3;
         }
@@ -129,22 +123,22 @@
         /* العنوان الرئيسي */
         .main-title {
             text-align: center;
-            font-size: 16pt;
+            font-size: 12pt;
             font-weight: bold;
             color: #000;
-            margin: 5mm 0;
+            margin: 4mm 0;
             position: relative;
             z-index: 1;
         }
 
-        /* المحتوى - هوامش متساوية من اليمين واليسار */
+        /* المحتوى */
         .content {
-            padding: 0 8mm; /* 8مم من اليمين و 8مم من اليسار */
+            padding: 0 9mm;
             position: relative;
             z-index: 1;
         }
 
-        /* الحقول */
+        /* الحقول - شفافة مع خطوط داكنة */
         .field-row {
             display: flex;
             align-items: center;
@@ -162,10 +156,11 @@
 
         .field-input-box {
             flex: 1;
-            border: 2px solid #000;
-            border-radius: 3mm;
-            height: 9mm;
+            border: 3px solid #000;
+            border-radius: 4mm;
+            height: 8mm;
             background: rgba(255,255,255,0.2);
+            max-width: 130mm;
         }
 
         .field-input {
@@ -182,66 +177,33 @@
             font-family: 'Cairo', Arial, sans-serif;
         }
 
-        /* صفوف التوقيع الجانبي - مطابقة للاستمارة */
-        .signature-row {
-            display: flex;
-            align-items: flex-start;
-            margin-bottom: 2mm;
-            width: 100%;
-            gap: 3mm;
-        }
-
-        .signature-left-box {
-            width: 50mm;
-            height: 28mm;
-            border: 2px solid #000;
-            border-radius: 4mm;
+        /* التوقيعات الجانبية - شفافة مع خط داكن */
+        .signature-side {
+            width: 48mm;
+            height: 22mm;
+            border: 3px solid #000;
+            border-radius: 5mm;
             display: flex;
             align-items: flex-end;
             justify-content: center;
             font-size: 10pt;
             font-weight: bold;
             background: rgba(255,255,255,0.25);
+            margin-right: 5mm;
             color: #000;
             padding-bottom: 2mm;
-            padding-top: 16mm;
+            padding-top: 15mm;
             text-align: center;
-            line-height: 1.3;
-            flex-shrink: 0;
-            order: 1; /* اليسار */
-        }
-
-        .fields-right-section {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            gap: 3mm;
-            order: 2; /* اليمين */
-        }
-
-        .field-item {
-            display: flex;
-            align-items: center;
-            width: 100%;
-        }
-
-        .field-item .field-label {
-            font-size: 11pt;
-            margin-left: 3mm;
-        }
-
-        .field-item .field-input-box {
-            flex: 1;
-            max-width: none;
+            line-height: 1.2;
         }
 
         /* صف الموبايل ونوع الإصدار */
         .mobile-issue-row {
             display: flex;
             align-items: center;
-            justify-content: flex-end;
+            justify-content: flex-start;
             margin: 3mm 0;
-            gap: 5mm;
+            gap: 4mm;
         }
 
         .mobile-section {
@@ -252,7 +214,7 @@
         .mobile-box {
             width: 45mm;
             border: 2px solid #000;
-            border-radius: 3mm;
+            border-radius: 4mm;
             height: 8mm;
             margin-right: 2mm;
             background: rgba(255,255,255,0.2);
@@ -269,7 +231,7 @@
             display: flex;
             align-items: center;
             gap: 1mm;
-            font-size: 10pt;
+            font-size: 9pt;
             font-weight: 600;
             white-space: nowrap;
             cursor: pointer;
@@ -281,7 +243,6 @@
             border: 2px solid #000;
             display: inline-block;
             background: rgba(255,255,255,0.3);
-            border-radius: 1mm;
         }
 
         .check-box.checked {
@@ -299,61 +260,61 @@
             transform: translate(-50%, -50%);
         }
 
-        /* التوقيعات الرئيسية */
+        /* التوقيعات الرئيسية - شفافة مع خط داكن */
         .main-signatures-row {
             display: flex;
             justify-content: space-between;
             gap: 5mm;
-            margin: 4mm 0;
+            margin: 3mm 0;
         }
 
         .main-sig {
             flex: 1;
-            height: 30mm;
-            border: 2px solid #000;
+            height: 26mm;
+            border: 3px solid #000;
             border-radius: 4mm;
             display: flex;
             align-items: flex-end;
             justify-content: center;
-            font-size: 11pt;
+            font-size: 10pt;
             font-weight: bold;
             text-align: center;
             background: rgba(255,255,255,0.2);
             color: #000;
             padding-bottom: 3mm;
             padding-top: 14mm;
-            line-height: 1.3;
+            line-height: 1.2;
         }
 
-        /* توقيعات المسؤولين - ارتفاع أكبر */
+        /* توقيعات المسؤولين - شفافة مع خط داكن */
         .sub-signatures-row {
             display: flex;
             justify-content: space-between;
             gap: 4mm;
-            margin: 4mm 0;
+            margin: 3mm 0;
         }
 
         .sub-sig {
             flex: 1;
-            height: 45mm; /* ارتفاع أكبر لمطابقة الاستمارة */
-            border: 2px solid #000;
+            height: 28mm;
+            border: 3px solid #000;
             border-radius: 4mm;
             display: flex;
             align-items: flex-end;
             justify-content: center;
-            font-size: 11pt;
+            font-size: 10pt;
             font-weight: bold;
             text-align: center;
             background: rgba(255,255,255,0.2);
             color: #000;
             padding-bottom: 3mm;
-            padding-top: 25mm;
+            padding-top: 16mm;
             line-height: 1.4;
         }
 
         /* الملاحظات */
         .notes-section {
-            margin-top: 3mm;
+            margin-top: 2mm;
         }
 
         .notes-title {
@@ -366,21 +327,21 @@
         .notes-list {
             list-style: none;
             font-size: 9pt;
-            line-height: 1.6;
+            line-height: 1.5;
             color: #000;
         }
 
         .notes-list li {
-            margin-bottom: 2mm;
+            margin-bottom: 3mm;
             text-indent: -3mm;
-            padding-right: 3mm;
+            padding-right: 2mm;
         }
 
         /* تذييل الصفحة */
         .footer {
             position: absolute;
-            bottom: 3mm;
-            left: 8mm; /* متساوٍ مع الهامش الأيمن للمحتوى */
+            bottom: 2mm;
+            left: 6mm;
             font-size: 8pt;
             color: #666;
             z-index: 1;
@@ -425,14 +386,14 @@
                 background: white !important;
                 padding: 0 !important;
                 margin: 0 !important;
-                width: 210mm !important;
-                height: 296mm !important;
+                width: 215mm !important;
+                height: 297mm !important;
             }
 
             .a4-page {
                 box-shadow: none !important;
                 margin: 0 !important;
-                width: 210mm !important;
+                width: 215mm !important;
                 height: 297mm !important;
                 overflow: visible !important;
             }
@@ -441,18 +402,10 @@
                 display: none !important;
             }
 
-            .header-wrapper {
-                margin: 3mm 3mm 0 3mm !important;
-                border: 2px dashed #166534 !important;
-                -webkit-print-color-adjust: exact !important;
-                print-color-adjust: exact !important;
-            }
-
             .header {
                 background: #c8e6c9 !important;
-                height: 35mm !important;
-                -webkit-print-color-adjust: exact !important;
-                print-color-adjust: exact !important;
+                height: 33mm !important;
+                width: 100% !important; /* تم التعديل */
             }
 
             .watermark {
@@ -460,6 +413,7 @@
                 display: block !important;
             }
 
+            /* الحقول شفافة في الطباعة */
             .field-input-box, .mobile-box {
                 background: rgba(255,255,255,0.15) !important;
                 border: 2px solid #000 !important;
@@ -469,9 +423,13 @@
                 background: transparent !important;
             }
 
-            .photo-box, .signature-left-box, .main-sig, .sub-sig {
+            .photo-box, .signature-side, .main-sig, .sub-sig {
                 background: rgba(255,255,255,0.2) !important;
                 border: 2px solid #000 !important;
+            }
+
+            .main-sig, .sub-sig {
+                border: 3px solid #000 !important;
             }
 
             .check-box {
@@ -527,23 +485,21 @@
         <button class="btn btn-clear" onclick="clearForm()">🗑️ مسح</button>
     </div>
 
-    <!-- صفحة الاستمارة - A4 كاملة -->
+    <!-- صفحة الاستمارة -->
     <div class="a4-page" id="formPage">
         <div class="watermark"></div>
 
-        <!-- الترويسة - خط متقطع من جميع الجهات -->
-        <div class="header-wrapper">
-            <div class="header">
-                <div class="photo-box">صورة ٢</div>
-                <div class="logo-center">
-                    <img src="image.png" alt="شعار الوزارة" onerror="this.style.display='none'">
-                </div>
-                <div class="header-text">
-                    <div>جمهورية العراق</div>
-                    <div>وزارة الشباب والرياضة</div>
-                    <div>مكتب الوزير</div>
-                    <div>مكتب التصاريح الأمنية</div>
-                </div>
+        <!-- الترويسة -->
+        <div class="header">
+            <div class="photo-box">صورة ٢</div>
+            <div class="logo-center">
+                <img src="image.png" alt="شعار الوزارة" onerror="this.style.display='none'">
+            </div>
+            <div class="header-text">
+                <div>جمهورية العراق</div>
+                <div>وزارة الشباب والرياضة</div>
+                <div>مكتب الوزير</div>
+                <div>قسم التصاريح الأمنية</div>
             </div>
         </div>
 
@@ -566,62 +522,63 @@
                 </div>
             </div>
 
-            <!-- العنوان الوظيفي + توقيع - مطابق للاستمارة -->
-            <div class="signature-row">
-                <div class="signature-left-box">توقيع صاحب الطلب</div>
-                <div class="fields-right-section">
-                    <div class="field-item">
-                        <label class="field-label">العنوان الوظيفي الحالي:</label>
-                        <div class="field-input-box">
-                            <input type="text" class="field-input" id="jobTitle">
-                        </div>
-                    </div>
-                    <div class="field-item">
-                        <label class="field-label">اسم الدائرة أو المديرية:</label>
-                        <div class="field-input-box">
-                            <input type="text" class="field-input" id="circleName">
-                        </div>
+            <!-- العنوان الوظيفي + توقيع -->
+            <div class="field-row" style="justify-content: space-between;">
+                <div style="display: flex; align-items: center; flex: 1;">
+                    <label class="field-label">العنوان الوظيفي الحالي:</label>
+                    <div class="field-input-box" style="max-width: 70mm;">
+                        <input type="text" class="field-input" id="jobTitle">
                     </div>
                 </div>
+                <div class="signature-side">توقيع صاحب الطلب</div>
             </div>
 
-            <!-- المنصب + توقيع - مطابق للاستمارة -->
-            <div class="signature-row">
-                <div class="signature-left-box">توقيع مدير القسم</div>
-                <div class="fields-right-section">
-                    <div class="field-item">
-                        <label class="field-label">المنصب:</label>
-                        <div class="field-input-box">
-                            <input type="text" class="field-input" id="position">
-                        </div>
-                    </div>
-                    <div class="field-item">
-                        <label class="field-label">رقم الموبايل:</label>
-                        <div class="mobile-box">
-                            <input type="text" class="field-input" id="mobileNumber" dir="ltr">
-                        </div>
+            <!-- المنصب + توقيع -->
+            <div class="field-row" style="justify-content: space-between;">
+                <div style="display: flex; align-items: center; flex: 1;">
+                    <label class="field-label">المنصب:</label>
+                    <div class="field-input-box" style="max-width: 70mm;">
+                        <input type="text" class="field-input" id="position">
                     </div>
                 </div>
+                <div class="signature-side">توقيع مدير القسم</div>
             </div>
 
-            <!-- نوع الإصدار -->
+            <!-- اسم الدائرة -->
+            <div class="field-row" style="justify-content: space-between; margin-bottom: 1mm;">
+                <div style="display: flex; align-items: center; flex: 1;">
+                    <label class="field-label">اسم الدائرة أو المديرية:</label>
+                    <div class="field-input-box" style="max-width: 70mm;">
+                        <input type="text" class="field-input" id="circleName">
+                    </div>
+                </div>
+                <div style="width: 50mm; margin-right: 3mm;"></div>
+            </div>
+
+            <!-- رقم الموبايل + نوع الإصدار -->
             <div class="mobile-issue-row">
+                <div class="mobile-section">
+                    <label class="field-label">رقم الموبايل:</label>
+                    <div class="mobile-box">
+                        <input type="text" class="field-input" id="mobileNumber" dir="ltr">
+                    </div>
+                </div>
                 <div class="issue-types">
                     <label class="issue-item" onclick="toggleCheck(this)">
-                        <span>إصدار جديد:</span>
                         <span class="check-box" data-value="new"></span>
+                        <span>إصدار جديد</span>
                     </label>
                     <label class="issue-item" onclick="toggleCheck(this)">
-                        <span>تبديل:</span>
                         <span class="check-box" data-value="replace"></span>
+                        <span>تبديل</span>
                     </label>
                     <label class="issue-item" onclick="toggleCheck(this)">
-                        <span>بدل تالف:</span>
                         <span class="check-box" data-value="damaged"></span>
+                        <span>بدل تالف</span>
                     </label>
                     <label class="issue-item" onclick="toggleCheck(this)">
-                        <span>بدل ضائع:</span>
                         <span class="check-box" data-value="lost"></span>
+                        <span>بدل ضائع</span>
                     </label>
                 </div>
             </div>
@@ -636,7 +593,7 @@
                 </div>
             </div>
 
-            <!-- توقيعات المسؤولين - ارتفاع أكبر -->
+            <!-- توقيعات المسؤولين -->
             <div class="sub-signatures-row">
                 <div class="sub-sig">
                     توقيع مسؤول شعبة<br>المعلومات
