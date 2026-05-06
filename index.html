@@ -2,725 +2,843 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>استمارة منح هوية الوزارة - وزارة الشباب والرياضة</title>
-
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="apple-mobile-web-app-title" content="استمارة الوزارة">
-    <meta name="mobile-web-app-capable" content="yes">
-    <meta name="theme-color" content="#166534">
-    <meta name="format-detection" content="telephone=no">
-
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>نظام التصاريح الأمنية - وزارة الشباب والرياضة</title>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800;900&display=swap" rel="stylesheet">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap');
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        :root {
+            --primary: #0a1628;
+            --primary-light: #1a3a5c;
+            --primary-dark: #050d1a;
+            --secondary: #c41e3a;
+            --secondary-light: #e63950;
+            --gold: #d4af37;
+            --gold-light: #f0d878;
+            --bg: #f0f2f5;
+            --card-bg: #ffffff;
+            --text: #1a1a1a;
+            --text-light: #5a5a5a;
+            --border: #d0d5dd;
+            --shadow: 0 4px 20px rgba(10, 22, 40, 0.12);
+            --shadow-hover: 0 8px 30px rgba(10, 22, 40, 0.2);
+            --radius: 16px;
+            --radius-sm: 10px;
         }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
-            font-family: 'Cairo', Arial, sans-serif;
-            background: #e0e0e0;
-            padding: 0;
-            margin: 0;
-            direction: rtl;
-        }
-
-        /* صفحة A4 */
-        .a4-page {
-            width: 210mm;
-            height: 296mm;
-            margin: 0 auto;
-            background: white;
-            position: relative;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-            overflow: hidden;
-            padding: 0;
-        }
-
-        /* العلامة المائية */
-        .watermark {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 150mm;
-            height: 150mm;
-            opacity: 0.15;
-            pointer-events: none;
-            z-index: 0;
-            background-image: url('image.png');
-            background-size: contain;
-            background-repeat: no-repeat;
-            background-position: center;
-        }
-
-        /* الترويسة - معدلة حسب الصورة */
-        .header-wrapper {
-            padding: 6mm 8mm 0 8mm; /* زيادة الهوامش حول الترويسة */
+            font-family: 'Tajawal', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.7;
+            min-height: 100vh;
         }
 
         .header {
+            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 50%, var(--primary-light) 100%);
+            color: white;
+            padding: 0;
             position: relative;
-            height: 35mm;
-            background: #c8e6c9;
-            border: 3px dashed #0d4a1c; /* خط متقطع أكثر وضوحاً */
-            border-radius: 3mm;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            opacity: 0.5;
+        }
+
+        .header-top {
+            background: rgba(0,0,0,0.2);
+            padding: 8px 0;
+            font-size: 0.85rem;
+        }
+
+        .header-top .container {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            z-index: 2;
-            padding: 2mm 4mm;
-            flex-direction: row-reverse;
         }
 
-        .photo-box {
-            width: 22mm;
-            height: 26mm;
-            border: 1.5px solid #000;
+        .header-main {
+            padding: 40px 0 60px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        .header-content {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .logo-icon {
+            width: 100px;
+            height: 100px;
+            background: white;
+            border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            background: rgba(255,255,255,0.5);
-            font-size: 9pt;
-            font-weight: bold;
-            z-index: 3;
-            text-align: center;
-            line-height: 1.4;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            border: 3px solid var(--gold);
+            flex-shrink: 0;
+            overflow: hidden;
+            padding: 4px;
         }
 
-        .logo-center {
-            position: absolute;
-            left: 50%;
-            top: 50%;
-            transform: translate(-50%, -50%);
-            text-align: center;
-            z-index: 3;
-        }
-
-        .logo-center img {
-            width: 28mm;
-            height: 28mm;
-            object-fit: contain;
-        }
-
-        .header-text {
-            text-align: right;
-            color: #000;
-            font-weight: bold;
-            font-size: 9.5pt;
-            line-height: 1.5;
-            z-index: 3;
-        }
-
-        /* العنوان الرئيسي */
-        .main-title {
-            text-align: center;
-            font-size: 13pt;
-            font-weight: bold;
-            color: #000;
-            margin: 10mm 0 8mm 0; /* زيادة الهوامش العلوية والسفلية */
-            position: relative;
-            z-index: 1;
-        }
-
-        /* المحتوى */
-        .content {
-            padding: 0 14mm; /* زيادة الهوامش الجانبية */
-            position: relative;
-            z-index: 1;
-        }
-
-        /* الحقول */
-        .field-row {
-            display: flex;
-            align-items: center;
-            margin-bottom: 4mm; /* زيادة المسافة بين الصفوف */
-            width: 100%;
-        }
-
-        .field-label {
-            font-weight: bold;
-            font-size: 11pt;
-            white-space: nowrap;
-            margin-left: 3mm;
-            color: #000;
-        }
-
-        .field-input-box {
-            flex: 1;
-            border: 2px solid #000;
-            border-radius: 3mm;
-            height: 8mm;
-            background: rgba(255,255,255,0.3);
-            max-width: 130mm;
-        }
-
-        .field-input {
+        .logo-icon img {
             width: 100%;
             height: 100%;
-            border: none;
-            background: transparent;
-            text-align: center;
-            font-size: 11pt;
-            font-weight: 600;
-            padding: 0 3mm;
-            outline: none;
-            color: #000;
-            font-family: 'Cairo', Arial, sans-serif;
+            object-fit: contain;
+            border-radius: 50%;
         }
 
-        /* التوقيعات الجانبية */
-        .signature-side {
-            width: 46mm;
-            height: 20mm;
-            border: 2px solid #000;
-            border-radius: 4mm;
+        .header-text h1 {
+            font-size: 2rem;
+            font-weight: 900;
+            margin-bottom: 6px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .header-text p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            font-weight: 500;
+        }
+
+        .header-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--gold);
+            color: var(--primary-dark);
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            margin-top: 12px;
+        }
+
+        .nav-bar {
+            background: white;
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 3px solid var(--gold);
+        }
+
+        .nav-content {
             display: flex;
-            align-items: flex-end;
             justify-content: center;
-            font-size: 9pt;
-            font-weight: bold;
-            background: rgba(255,255,255,0.3);
-            margin-right: 4mm;
-            color: #000;
-            padding-bottom: 2mm;
-            padding-top: 12mm;
+            gap: 8px;
+            padding: 12px 0;
+        }
+
+        .nav-btn {
+            background: none;
+            border: 2px solid transparent;
+            padding: 10px 24px;
+            border-radius: var(--radius-sm);
+            font-family: 'Tajawal', sans-serif;
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--text-light);
+            cursor: default;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .nav-btn:hover {
+            background: var(--bg);
+            color: var(--primary);
+            transform: scale(1.05);
+            font-size: 1.1rem;
+        }
+
+        .nav-btn.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+            box-shadow: 0 4px 12px rgba(10, 22, 40, 0.4);
+            cursor: default;
+        }
+
+        .nav-btn .icon {
+            width: 22px;
+            height: 22px;
+        }
+
+        .main-content {
+            padding: 40px 0 60px;
+        }
+
+        .section-title {
             text-align: center;
-            line-height: 1.2;
+            margin-bottom: 40px;
         }
 
-        /* صف الموبايل ونوع الإصدار */
-        .mobile-issue-row {
-            display: flex;
-            align-items: center;
-            justify-content: flex-start;
-            margin: 5mm 0; /* زيادة الهوامش */
-            gap: 4mm;
+        .section-title h2 {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--primary-dark);
+            margin-bottom: 8px;
         }
 
-        .mobile-section {
-            display: flex;
-            align-items: center;
+        .section-title p {
+            color: var(--text-light);
+            font-size: 1.05rem;
         }
 
-        .mobile-box {
-            width: 40mm;
-            border: 2px solid #000;
-            border-radius: 3mm;
-            height: 8mm;
-            margin-right: 2mm;
-            background: rgba(255,255,255,0.3);
+        .section-title .line {
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--gold));
+            border-radius: 2px;
+            margin: 12px auto 0;
         }
 
-        /* نوع الإصدار */
-        .issue-types {
-            display: flex;
-            align-items: center;
-            gap: 2mm;
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 28px;
+            margin-bottom: 40px;
         }
 
-        .issue-item {
-            display: flex;
-            align-items: center;
-            gap: 1mm;
-            font-size: 9pt;
-            font-weight: 600;
-            white-space: nowrap;
-            cursor: pointer;
-        }
-
-        .check-box {
-            width: 5mm;
-            height: 5mm;
-            border: 2px solid #000;
-            display: inline-block;
-            background: rgba(255,255,255,0.3);
-            border-radius: 1mm;
-        }
-
-        .check-box.checked {
-            background: #4caf50;
+        .form-card {
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: all 0.4s ease;
+            border: 1px solid var(--border);
             position: relative;
         }
 
-        .check-box.checked::after {
-            content: '✓';
-            color: white;
-            font-size: 8pt;
+        .form-card::before {
+            content: '';
             position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
+            top: 0; left: 0; right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, var(--primary), var(--gold));
         }
 
-        /* التوقيعات الرئيسية */
-        .main-signatures-row {
-            display: flex;
-            justify-content: space-between;
-            gap: 4mm;
-            margin: 5mm 0; /* زيادة الهوامش */
+        .form-card:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-hover);
         }
 
-        .main-sig {
-            flex: 1;
-            height: 24mm;
-            border: 2px solid #000;
-            border-radius: 4mm;
+        .card-header {
+            padding: 28px 28px 20px;
             display: flex;
-            align-items: flex-end;
+            align-items: flex-start;
+            gap: 16px;
+        }
+
+        .card-icon {
+            width: 56px;
+            height: 56px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
             justify-content: center;
-            font-size: 9pt;
-            font-weight: bold;
-            text-align: center;
-            background: rgba(255,255,255,0.3);
-            color: #000;
-            padding-bottom: 3mm;
-            padding-top: 12mm;
-            line-height: 1.3;
+            flex-shrink: 0;
+            font-size: 1.6rem;
         }
 
-        /* توقيعات المسؤولين */
-        .sub-signatures-row {
-            display: flex;
-            justify-content: space-between;
-            gap: 3mm;
-            margin: 5mm 0; /* زيادة الهوامش */
+        .card-icon.green {
+            background: linear-gradient(135deg, #e3f2fd, #bbdefb);
+            color: var(--primary);
         }
 
-        .sub-sig {
-            flex: 1;
-            height: 26mm;
-            border: 2px solid #000;
-            border-radius: 4mm;
-            display: flex;
-            align-items: flex-end;
-            justify-content: center;
-            font-size: 9pt;
-            font-weight: bold;
-            text-align: center;
-            background: rgba(255,255,255,0.3);
-            color: #000;
-            padding-bottom: 3mm;
-            padding-top: 14mm;
-            line-height: 1.3;
+        .card-icon.red {
+            background: linear-gradient(135deg, #ffebee, #ffcdd2);
+            color: var(--secondary);
         }
 
-        /* الملاحظات */
-        .notes-section {
-            margin-top: 6mm; /* زيادة الهامش العلوي */
+        .card-icon.blue {
+            background: linear-gradient(135deg, #e3f2fd, #bbdefb);
+            color: #1565c0;
         }
 
-        .notes-title {
-            font-weight: bold;
-            font-size: 11pt;
-            margin-bottom: 3mm; /* زيادة الهامش السفلي */
-            color: #000;
+        .card-icon.purple {
+            background: linear-gradient(135deg, #f3e5f5, #e1bee7);
+            color: #6a1b9a;
         }
 
-        .notes-list {
+        .card-icon.orange {
+            background: linear-gradient(135deg, #fff3e0, #ffe0b2);
+            color: #e65100;
+        }
+
+        .card-title-group h3 {
+            font-size: 1.25rem;
+            font-weight: 800;
+            color: var(--text);
+            margin-bottom: 4px;
+        }
+
+        .card-title-group .subtitle {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            font-weight: 500;
+        }
+
+        .card-body {
+            padding: 0 28px 24px;
+        }
+
+        .features-list {
             list-style: none;
-            font-size: 9pt;
-            line-height: 1.8; /* زيادة التباعد بين الأسطر */
-            color: #000;
+            margin-bottom: 20px;
         }
 
-        .notes-list li {
-            margin-bottom: 3mm; /* زيادة المسافة بين النقاط */
-            text-indent: -3mm;
-            padding-right: 3mm;
-        }
-
-        /* تذييل الصفحة */
-        .footer {
-            position: absolute;
-            bottom: 4mm; /* زيادة الهامش السفلي */
-            left: 8mm; /* زيادة الهامش الأيسر */
-            font-size: 8pt;
-            color: #666;
-            z-index: 1;
-        }
-
-        /* أزرار التحكم */
-        .controls {
-            text-align: center;
-            margin: 20px;
-            direction: rtl;
+        .features-list li {
             display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
+            align-items: center;
             gap: 10px;
+            padding: 8px 0;
+            font-size: 0.95rem;
+            color: var(--text-light);
+            border-bottom: 1px dashed var(--border);
+        }
+
+        .features-list li:last-child {
+            border-bottom: none;
+        }
+
+        .features-list li .check {
+            width: 20px;
+            height: 20px;
+            background: var(--primary-light);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            flex-shrink: 0;
+        }
+
+        .card-footer {
+            padding: 0 28px 28px;
+            display: flex;
+            gap: 12px;
         }
 
         .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
             padding: 12px 24px;
-            border: none;
-            border-radius: 8px;
+            border-radius: var(--radius-sm);
+            font-family: 'Tajawal', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 700;
+            text-decoration: none;
             cursor: pointer;
-            font-family: 'Cairo', Arial;
-            font-size: 12pt;
-            font-weight: bold;
-            transition: all 0.3s;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-            min-width: 140px;
+            transition: all 0.3s ease;
+            border: none;
+            flex: 1;
         }
 
-        .btn-print { background: #4caf50; color: white; }
-        .btn-pdf { background: #2196f3; color: white; }
-        .btn-clear { background: #f44336; color: white; }
-
-        /* إعدادات الطباعة */
-        @media print {
-            @page {
-                size: A4 portrait;
-                margin: 0;
-            }
-
-            body {
-                background: white !important;
-                padding: 0 !important;
-                margin: 0 !important;
-                width: 210mm !important;
-                height: 297mm !important;
-            }
-
-            .a4-page {
-                box-shadow: none !important;
-                margin: 0 !important;
-                width: 210mm !important;
-                height: 297mm !important;
-                overflow: visible !important;
-            }
-
-            .controls {
-                display: none !important;
-            }
-
-            .header-wrapper {
-                padding: 6mm 8mm 0 8mm !important; /* هوامش أكبر في الطباعة */
-            }
-
-            .header {
-                background: #c8e6c9 !important;
-                height: 35mm !important;
-                border: 3px dashed #0d4a1c !important; /* خط متقطع أكثر وضوحاً */
-                border-radius: 3mm !important;
-                -webkit-print-color-adjust: exact !important;
-                print-color-adjust: exact !important;
-            }
-
-            .watermark {
-                opacity: 0.12 !important;
-                display: block !important;
-            }
-
-            .field-input-box, .mobile-box {
-                background: rgba(255,255,255,0.2) !important;
-                border: 2px solid #000 !important;
-            }
-
-            .field-input {
-                background: transparent !important;
-            }
-
-            .photo-box, .signature-side, .main-sig, .sub-sig {
-                background: rgba(255,255,255,0.3) !important;
-                border: 2px solid #000 !important;
-            }
-
-            .check-box {
-                background: rgba(255,255,255,0.3) !important;
-                border: 2px solid #000 !important;
-            }
-
-            .content {
-                padding: 0 14mm !important; /* هوامش جانبية أكبر في الطباعة */
-            }
-
-            .main-title {
-                margin: 10mm 0 8mm 0 !important; /* هوامش أكبر في الطباعة */
-            }
-
-            .field-row {
-                margin-bottom: 4mm !important;
-            }
-
-            .mobile-issue-row,
-            .main-signatures-row,
-            .sub-signatures-row {
-                margin: 5mm 0 !important;
-            }
-
-            .notes-section {
-                margin-top: 6mm !important;
-            }
-
-            .footer {
-                bottom: 4mm !important;
-                left: 8mm !important;
-            }
-
-            * {
-                color: #000000 !important;
-                -webkit-print-color-adjust: exact !important;
-                print-color-adjust: exact !important;
-            }
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            color: white;
+            box-shadow: 0 4px 12px rgba(10, 22, 40, 0.3);
         }
 
-        /* الموبايل */
-        @media screen and (max-width: 768px) {
-            body {
-                padding: 10px;
-                background: #f5f5f5;
-            }
-
-            .a4-page {
-                width: 100%;
-                height: auto;
-                margin: 0 auto 20px;
-            }
-
-            .controls {
-                position: fixed;
-                bottom: 0;
-                left: 0;
-                right: 0;
-                background: white;
-                padding: 15px;
-                margin: 0;
-                box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
-                z-index: 1000;
-            }
-
-            .btn {
-                flex: 1;
-                min-width: auto;
-            }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 18px rgba(10, 22, 40, 0.4);
         }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--text-light);
+            border: 2px solid var(--border);
+            cursor: not-allowed;
+            opacity: 0.6;
+        }
+
+        .btn-outline:hover {
+            background: transparent;
+            color: var(--text-light);
+            transform: none;
+            box-shadow: none;
+        }
+
+        .btn-secondary {
+            background: linear-gradient(135deg, var(--secondary), var(--secondary-light));
+            color: white;
+            box-shadow: 0 4px 12px rgba(196, 30, 58, 0.25);
+        }
+
+        .btn-secondary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 18px rgba(196, 30, 58, 0.35);
+        }
+
+        .btn-purple {
+            background: linear-gradient(135deg, #6a1b9a, #9c27b0);
+            color: white;
+            box-shadow: 0 4px 12px rgba(106, 27, 154, 0.25);
+        }
+
+        .btn-purple:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 18px rgba(106, 27, 154, 0.35);
+        }
+
+        .btn-orange {
+            background: linear-gradient(135deg, #e65100, #ff8f00);
+            color: white;
+            box-shadow: 0 4px 12px rgba(230, 81, 0, 0.25);
+        }
+
+        .btn-orange:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 18px rgba(230, 81, 0, 0.35);
+        }
+
+        .info-banner {
+            background: linear-gradient(135deg, #fff8e1, #fffde7);
+            border: 1px solid var(--gold-light);
+            border-radius: var(--radius);
+            padding: 24px 28px;
+            margin-bottom: 40px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            box-shadow: var(--shadow);
+        }
+
+        .info-banner .icon-wrap {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--gold), var(--gold-light));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            flex-shrink: 0;
+        }
+
+        .info-banner h4 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--primary-dark);
+            margin-bottom: 4px;
+        }
+
+        .info-banner p {
+            font-size: 0.95rem;
+            color: var(--text-light);
+        }
+
+        .stats-section {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .stat-box {
+            background: var(--card-bg);
+            border-radius: var(--radius-sm);
+            padding: 24px;
+            text-align: center;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border);
+            transition: all 0.3s ease;
+        }
+
+        .stat-box:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .stat-box .number {
+            font-size: 2rem;
+            font-weight: 900;
+            color: var(--primary);
+            line-height: 1;
+            margin-bottom: 8px;
+        }
+
+        .stat-box .label {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            font-weight: 600;
+        }
+
+        .footer {
+            background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+            color: white;
+            padding: 40px 0 0;
+            margin-top: 40px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 40px;
+            padding-bottom: 40px;
+        }
+
+        .footer-brand h3 {
+            font-size: 1.3rem;
+            font-weight: 800;
+            margin-bottom: 12px;
+        }
+
+        .footer-brand p {
+            opacity: 0.8;
+            font-size: 0.95rem;
+            line-height: 1.8;
+        }
+
+        .footer-links h4 {
+            font-size: 1rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+            color: var(--gold-light);
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .footer-links a:hover {
+            color: var(--gold);
+            padding-right: 8px;
+        }
+
+        .footer-bottom {
+            background: rgba(0,0,0,0.2);
+            padding: 20px 0;
+            text-align: center;
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        @media (max-width: 768px) {
+            .header-text h1 { font-size: 1.4rem; }
+            .header-content { flex-direction: column; text-align: center; }
+            .cards-grid { grid-template-columns: 1fr; }
+            .stats-section { grid-template-columns: repeat(2, 1fr); }
+            .footer-content { grid-template-columns: 1fr; gap: 30px; }
+            .nav-content { flex-wrap: wrap; }
+            .card-footer { flex-direction: column; }
+            .logo-icon { width: 80px; height: 80px; }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .form-card {
+            animation: fadeInUp 0.5s ease forwards;
+        }
+
+        .form-card:nth-child(1) { animation-delay: 0.1s; }
+        .form-card:nth-child(2) { animation-delay: 0.2s; }
+        .form-card:nth-child(3) { animation-delay: 0.3s; }
+        .form-card:nth-child(4) { animation-delay: 0.4s; }
+        .form-card:nth-child(5) { animation-delay: 0.5s; }
     </style>
+<base target="_blank">
 <base target="_blank">
 </head>
 <body>
 
-    <!-- أزرار التحكم -->
-    <div class="controls">
-        <button class="btn btn-print" onclick="printForm()">🖨️ طباعة</button>
-        <button class="btn btn-pdf" onclick="savePDF()">📄 حفظ PDF</button>
-        <button class="btn btn-clear" onclick="clearForm()">🗑️ مسح</button>
-    </div>
-
-    <!-- صفحة الاستمارة -->
-    <div class="a4-page" id="formPage">
-        <div class="watermark"></div>
-
-        <!-- الترويسة مع هوامش أكبر -->
-        <div class="header-wrapper">
-            <div class="header">
-                <div class="photo-box">صورة ٢</div>
-                <div class="logo-center">
-                    <img src="image.png" alt="شعار الوزارة" onerror="this.style.display='none'">
-                </div>
-                <div class="header-text">
-                    <div>جمهورية العراق</div>
-                    <div>وزارة الشباب والرياضة</div>
-                    <div>مكتب الوزير</div>
-                    <div>مكتب التصاريح الأمنية</div>
+    <header class="header">
+        <div class="header-top">
+            <div class="container">
+                <span>🌐 الموقع الرسمي  لقسم التصاريح الامنية - وزارة الشباب والرياضة - جمهورية العراق</span>
+            </div>
+        </div>
+        <div class="header-main">
+            <div class="container">
+                <div class="header-content">
+                    <div class="logo-section">
+                        <div class="logo-icon">
+                            <img src="image.png" alt="شعار وزارة الشباب والرياضة العراقية">
+                        </div>
+                        <div class="header-text">
+                            <h1>نظام التصاريح الأمنية الإلكتروني</h1>
+                            <p>قسم التصاريح الأمنية - وزارة الشباب والرياضة</p>
+                            <div class="header-badge">
+                                <span>🏛️</span>
+                                <span>البوابة الرقمية الموحدة للتصاريح</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
+    </header>
 
-        <div class="main-title">استمارة منح هوية الوزارة</div>
-
-        <div class="content">
-            <!-- الاسم الرباعي -->
-            <div class="field-row">
-                <label class="field-label">الاسم الرباعي واللقب:</label>
-                <div class="field-input-box">
-                    <input type="text" class="field-input" id="fullName">
-                </div>
-            </div>
-
-            <!-- الاسم الإنجليزي -->
-            <div class="field-row">
-                <label class="field-label">الاسم باللغة الانكليزية:</label>
-                <div class="field-input-box">
-                    <input type="text" class="field-input" id="englishName" dir="ltr">
-                </div>
-            </div>
-
-            <!-- العنوان الوظيفي + توقيع -->
-            <div class="field-row" style="justify-content: space-between;">
-                <div style="display: flex; align-items: center; flex: 1;">
-                    <label class="field-label">العنوان الوظيفي الحالي:</label>
-                    <div class="field-input-box" style="max-width: 68mm;">
-                        <input type="text" class="field-input" id="jobTitle">
-                    </div>
-                </div>
-                <div class="signature-side">توقيع صاحب الطلب</div>
-            </div>
-
-            <!-- المنصب + توقيع -->
-            <div class="field-row" style="justify-content: space-between;">
-                <div style="display: flex; align-items: center; flex: 1;">
-                    <label class="field-label">المنصب:</label>
-                    <div class="field-input-box" style="max-width: 68mm;">
-                        <input type="text" class="field-input" id="position">
-                    </div>
-                </div>
-                <div class="signature-side">توقيع مدير القسم</div>
-            </div>
-
-            <!-- اسم الدائرة -->
-            <div class="field-row" style="justify-content: space-between; margin-bottom: 2mm;">
-                <div style="display: flex; align-items: center; flex: 1;">
-                    <label class="field-label">اسم الدائرة أو المديرية:</label>
-                    <div class="field-input-box" style="max-width: 68mm;">
-                        <input type="text" class="field-input" id="circleName">
-                    </div>
-                </div>
-                <div style="width: 46mm; margin-right: 4mm;"></div>
-            </div>
-
-            <!-- رقم الموبايل + نوع الإصدار -->
-            <div class="mobile-issue-row">
-                <div class="mobile-section">
-                    <label class="field-label">رقم الموبايل:</label>
-                    <div class="mobile-box">
-                        <input type="text" class="field-input" id="mobileNumber" dir="ltr">
-                    </div>
-                </div>
-                <div class="issue-types">
-                    <label class="issue-item" onclick="toggleCheck(this)">
-                        <span class="check-box" data-value="new"></span>
-                        <span>إصدار جديد</span>
-                    </label>
-                    <label class="issue-item" onclick="toggleCheck(this)">
-                        <span class="check-box" data-value="replace"></span>
-                        <span>تبديل</span>
-                    </label>
-                    <label class="issue-item" onclick="toggleCheck(this)">
-                        <span class="check-box" data-value="damaged"></span>
-                        <span>بدل تالف</span>
-                    </label>
-                    <label class="issue-item" onclick="toggleCheck(this)">
-                        <span class="check-box" data-value="lost"></span>
-                        <span>بدل ضائع</span>
-                    </label>
-                </div>
-            </div>
-
-            <!-- التوقيعات الرئيسية -->
-            <div class="main-signatures-row">
-                <div class="main-sig">
-                    ختم وتوقيع مدير عام دائرة الموظف
-                </div>
-                <div class="main-sig">
-                    ختم وتوقيع مدير قسم التصاريح الأمنية
-                </div>
-            </div>
-
-            <!-- توقيعات المسؤولين -->
-            <div class="sub-signatures-row">
-                <div class="sub-sig">
-                    توقيع مسؤول شعبة<br>المعلومات
-                </div>
-                <div class="sub-sig">
-                    توقيع مسؤول شعبة<br>التصاريح
-                </div>
-                <div class="sub-sig">
-                    توقيع مسؤول شعبة<br>الهويات
-                </div>
-            </div>
-
-            <!-- الملاحظات -->
-         <div class="notes-section">
-    <div class="notes-title">ملاحظات:-</div>
-    <ul class="notes-list">
-        <li><bdi>-1</bdi> يرفق نسخة من البطاقة الوطنية.</li>
-        <li><bdi>-2</bdi> يرفق نسخة من الأمر الوزاري بالتعيين ونسخة من كتاب المباشرة في حال الإصدار الأول.</li>
-        <li><bdi>-3</bdi> يرفق نسخة من أمر النقل والمباشرة في حال الانتقال من دائرة إلى أخرى.</li>
-        <li><bdi>-4</bdi> يرفق نسخة من أمر التكليف في حال منصب مدير قسم فما فوق.</li>
-        <li><bdi>-5</bdi> يرفق نسخة من الأمر الجامعي في حال إضافة عبارة (دكتور).</li>
-     </ul>
+    <nav class="nav-bar">
+        <div class="container">
+            <div class="nav-content">
+                <button class="nav-btn active" onclick="showSection('forms')">
+                    <span>📋</span>
+                    <span>الاستمارات</span>
+                </button>
             </div>
         </div>
+    </nav>
 
-        <div class="footer">
-            SPD-QP-01,03,01-15 JUN.2023
+    <main class="main-content">
+        <div class="container">
+
+            <div class="section-title">
+                <h2>الاستمارات المتاحة</h2>
+                <p>اختر الاستمارة المناسبة واملأ البيانات المطلوبة</p>
+                <div class="line"></div>
+            </div>
+
+            <div class="info-banner">
+                <div class="icon-wrap">⚡</div>
+                <div>
+                    <h4>تنبيه هام</h4>
+                    <p>يجب تقديم الطلب مسبقاً قبل يومين على الأقل من الموعد المطلوب. يُمنع إدخال وإخراج المواد في أيام العطل الرسمية.</p>
+                </div>
+            </div>
+
+            <div class="stats-section">
+                <div class="stat-box">
+                    <div class="number">5</div>
+                    <div class="label">استمارات إلكترونية</div>
+                </div>
+                <div class="stat-box">
+                    <div class="number">24/7</div>
+                    <div class="label">خدمة متوفرة</div>
+                </div>
+                <div class="stat-box">
+                    <div class="number">6:00</div>
+                    <div class="label">مساءً آخر موعد</div>
+                </div>
+                <div class="stat-box">
+                    <div class="number">2</div>
+                    <div class="label">يوم مسبق للطلب</div>
+                </div>
+            </div>
+
+            <div class="cards-grid">
+
+                <div class="form-card">
+                    <div class="card-header">
+                        <div class="card-icon green">📦</div>
+                        <div class="card-title-group">
+                            <h3>استمارة إدخال/إخراج المواد</h3>
+                            <p class="subtitle">للمواد والمعدات الداخلة والخارجة من مقر الوزارة</p>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <ul class="features-list">
+                            <li><span class="check">✓</span> تسجيل بيانات المخول والسائق</li>
+                            <li><span class="check">✓</span> قائمة مواد مفصلة (25 مادة)</li>
+                            <li><span class="check">✓</span> تحديد نوع العملية (إدخال/إخراج)</li>
+                            <li><span class="check">✓</span> توقيعات الأقسام المعنية</li>
+                            <li><span class="check">✓</span> إرفاق الهويات والسنوية</li>
+                        </ul>
+                    </div>
+                    <div class="card-footer">
+                        <a href="https://tasreehamnee-ux.github.io/estimara.id/" target="_blank" class="btn btn-primary">
+                            <span>🚀</span>
+                            <span>فتح الاستمارة</span>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="form-card">
+                    <div class="card-header">
+                        <div class="card-icon red">🚗</div>
+                        <div class="card-title-group">
+                            <h3>استمارة منح تخويل عجلات</h3>
+                            <p class="subtitle">للموظفين - تخويل استخدام المركبات الحكومية</p>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <ul class="features-list">
+                            <li><span class="check">✓</span> بيانات الموظف والدائرة</li>
+                            <li><span class="check">✓</span> تفاصيل المركبة (نوع، لون، سنة)</li>
+                            <li><span class="check">✓</span> رقم العجلة والشاصي</li>
+                            <li><span class="check">✓</span> تحديد نطاق السير والمهام</li>
+                            <li><span class="check">✓</span> موافقات الأقسام المعنية</li>
+                        </ul>
+                    </div>
+                    <div class="card-footer">
+                        <a href="https://tasreehamnee-ux.github.io/estmaraa.com/" target="_blank" class="btn btn-secondary">
+                            <span>🚀</span>
+                            <span>فتح الاستمارة</span>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="form-card">
+                    <div class="card-header">
+                        <div class="card-icon blue">🏛️</div>
+                        <div class="card-title-group">
+                            <h3>تصريح دخول الاتحادات</h3>
+                            <p class="subtitle">للأتحادات الرياضية - الدخول إلى مقر الوزارة</p>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <ul class="features-list">
+                            <li><span class="check">✓</span> بيانات المخول والاتحاد</li>
+                            <li><span class="check">✓</span> إصدار باجات تعريفية</li>
+                            <li><span class="check">✓</span> تحديد المسؤوليات والالتزامات</li>
+                            <li><span class="check">✓</span> إمكانية طلب الأنشطة</li>
+                            <li><span class="check">✓</span> إرفاق الهويات الموحدة</li>
+                        </ul>
+                    </div>
+                    <div class="card-footer">
+                        <a href="https://tasreehamnee-ux.github.io/etehad.com/" target="_blank" class="btn btn-primary">
+                            <span>🚀</span>
+                            <span>فتح الاستمارة</span>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="form-card">
+                    <div class="card-header">
+                        <div class="card-icon purple">🪪</div>
+                        <div class="card-title-group">
+                            <h3>استمارة منح هوية الوزارة</h3>
+                            <p class="subtitle">للموظفين - إصدار هوية وزارة الشباب والرياضة</p>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <ul class="features-list">
+                            <li><span class="check">✓</span> إصدار جديد / تبديل / بدل تالف / بدل ضائع</li>
+                            <li><span class="check">✓</span> إرفاق نسخة من البطاقة الوطنية</li>
+                            <li><span class="check">✓</span> إرفاق الأمر الوزاري بالتعيين</li>
+                            <li><span class="check">✓</span> توقيعات مدير عام ومسؤولي الأقسام</li>
+                            <li><span class="check">✓</span> ختم وتوقيع مدير قسم التصاريح الأمنية</li>
+                        </ul>
+                    </div>
+                    <div class="card-footer">
+                        <a href="https://www.mawkie.com/" target="_blank" class="btn btn-purple">
+                            <span>🚀</span>
+                            <span>فتح الاستمارة</span>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="form-card">
+                    <div class="card-header">
+                        <div class="card-icon orange">📋</div>
+                        <div class="card-title-group">
+                            <h3>استمارة إصدار التصاريح</h3>
+                            <p class="subtitle">للموظفين - إصدار تصاريح الأمنية الرسمية</p>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <ul class="features-list">
+                            <li><span class="check">✓</span> بيانات الموظف والمنصب</li>
+                            <li><span class="check">✓</span> تحديد نوع التصريح المطلوب</li>
+                            <li><span class="check">✓</span> إرفاق المستندات الرسمية</li>
+                            <li><span class="check">✓</span> موافقات الأقسام المعنية</li>
+                            <li><span class="check">✓</span> متابعة حالة الطلب إلكترونياً</li>
+                        </ul>
+                    </div>
+                    <div class="card-footer">
+                        <a href="https://tasreehamnee-ux.github.io/estee.in/" target="_blank" class="btn btn-orange">
+                            <span>🚀</span>
+                            <span>فتح الاستمارة</span>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="info-banner" style="background: linear-gradient(135deg, #e3f2fd, #bbdefb); border-color: #90caf9;">
+                <div class="icon-wrap" style="background: linear-gradient(135deg, var(--primary-light), var(--primary)); color: white;">📋</div>
+                <div>
+                    <h4 style="color: var(--primary-dark);">المستندات المطلوبة لجميع الاستمارات</h4>
+                    <p>يرفق مع الطلب: كتاب رسمي من الدائرة المعنية مختوم، نسخ من الهويات، إجازة السوق، محضر استلام العجلة، السنوية. يتم استلام الاستمارات من قسم التصاريح الأمنية حصراً.</p>
+                </div>
+            </div>
+
         </div>
-    </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <h3>🏛️ وزارة الشباب والرياضة</h3>
+                    <p>قسم التصاريح الأمنية - النظام الإلكتروني الموحد للتصاريح والاستمارات. نسعى لتسهيل الإجراءات وتوفير الوقت والجهد للمواطنين والموظفين.</p>
+                </div>
+                <div class="footer-links">
+                    <h4>روابط سريعة</h4>
+                    <ul>
+                        <li><a href="https://tasreehamnee-ux.github.io/estimara.id/" target="_blank">📦 استمارة المواد</a></li>
+                        <li><a href="https://tasreehamnee-ux.github.io/estmaraa.com/" target="_blank">🚗 تخويل العجلات</a></li>
+                        <li><a href="https://tasreehamnee-ux.github.io/etehad.com/" target="_blank">🏛️ دخول الاتحادات</a></li>
+                        <li><a href="https://www.mawkie.com/" target="_blank">🪪 هوية الوزارة</a></li>
+                        <li><a href="https://tasreehamnee-ux.github.io/estee.in/" target="_blank">📋 إصدار التصاريح</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>معلومات التواصل</h4>
+                    <ul>
+                        <li><a href="#">📍 بغداد - مقر الوزارة</a></li>
+                        <li><a href="#">🕐 الأحد - الخميس: 8ص - 2م</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="container">
+                <p>© 2026 وزارة الشباب والرياضة - جمهورية العراق | جميع الحقوق محفوظة</p>
+            </div>
+        </div>
+    </footer>
 
     <script>
-        function toggleCheck(element) {
-            const checkbox = element.querySelector('.check-box');
-            checkbox.classList.toggle('checked');
-            localStorage.setItem('checkbox_' + checkbox.dataset.value, checkbox.classList.contains('checked'));
+        function showSection(section) {
+            document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.closest('.nav-btn').classList.add('active');
         }
-
-        function restoreCheckboxes() {
-            document.querySelectorAll('.check-box').forEach(box => {
-                if (localStorage.getItem('checkbox_' + box.dataset.value) === 'true') {
-                    box.classList.add('checked');
-                }
-            });
-        }
-
-        function clearForm() {
-            if(confirm('هل أنت متأكد من مسح جميع البيانات؟')) {
-                document.querySelectorAll('input[type="text"]').forEach(input => {
-                    input.value = '';
-                    localStorage.removeItem(input.id);
-                });
-                document.querySelectorAll('.check-box').forEach(box => {
-                    box.classList.remove('checked');
-                    localStorage.removeItem('checkbox_' + box.dataset.value);
-                });
-            }
-        }
-
-        function printForm() {
-            window.print();
-        }
-
-        function savePDF() {
-            const element = document.getElementById('formPage');
-            const opt = {
-                margin: 0,
-                filename: 'استمارة_هوية_الوزارة.pdf',
-                image: { type: 'jpeg', quality: 0.98 },
-                html2canvas: {
-                    scale: 2,
-                    useCORS: true,
-                    backgroundColor: '#ffffff'
-                },
-                jsPDF: {
-                    unit: 'mm',
-                    format: 'a4',
-                    orientation: 'portrait'
-                }
-            };
-
-            html2pdf().set(opt).from(element).save().then(() => {
-                alert('تم حفظ الملف بنجاح!');
-            });
-        }
-
-        // حفظ تلقائي
-        document.querySelectorAll('input[type="text"]').forEach(input => {
-            const saved = localStorage.getItem(input.id);
-            if(saved) input.value = saved;
-            input.addEventListener('input', function() {
-                localStorage.setItem(this.id, this.value);
-            });
-        });
-
-        window.addEventListener('load', restoreCheckboxes);
     </script>
 
 </body>
